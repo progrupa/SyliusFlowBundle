@@ -79,12 +79,12 @@ class ProcessBuilder implements ProcessBuilderInterface
             throw new \InvalidArgumentException('Step added via builder must implement "Sylius\Bundle\FlowBundle\Process\Step\StepInterface"');
         }
 
-        if (!$step->isActive()) {
-            return $this;
-        }
-
         if ($step instanceof ContainerAwareInterface) {
             $step->setContainer($this->container);
+        }
+
+        if (!$step->isActive()) {
+            return $this;
         }
 
         $step->setName($name);
